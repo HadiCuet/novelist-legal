@@ -65,36 +65,33 @@
 
 <h2>2. Data we collect</h2>
 
-<h3>Stays only on your device — never sent to us</h3>
-<p>Everything below is stored locally on your device using Apple's SwiftData framework and iOS user defaults. <strong>We have no server that stores your stories, and we cannot read them.</strong></p>
+<h3>An anonymous account (no name, email, or password)</h3>
+<p>On first launch, Novelist creates an <strong>anonymous account</strong> for your device using Firebase Authentication's anonymous sign-in. <strong>No name, email address, phone number, or password is ever requested or collected.</strong> This anonymous account is a random identifier tied to your app install; we cannot use it to look up who you are, because we hold no directly-identifying information about you. Everything our backend stores (below) is keyed to this anonymous ID.</p>
+
+<h3>On your device</h3>
+<p>The app keeps a local copy of your content on your device (using Apple's SwiftData framework and iOS user defaults) so it works smoothly and can be read back quickly:</p>
 <ul>
-  <li><strong>Your stories and chapters</strong> — titles, prose, chapter order, and export history.</li>
-  <li><strong>Characters</strong> you create — names, archetypes, and descriptions.</li>
-  <li><strong>Story memory</strong> — the running summary Novelist keeps of a story so later chapters stay consistent.</li>
+  <li><strong>Your stories and chapters</strong> — titles and the full chapter text.</li>
+  <li><strong>Characters</strong> in your character library and the running <strong>story memory</strong> Novelist keeps so later chapters stay consistent.</li>
   <li><strong>Discover reading progress</strong> — which bundled stories you've opened or finished.</li>
   <li><strong>Settings</strong> — theme, language, reader preferences, and onboarding state.</li>
   <li><strong>Purchase/entitlement state</strong> — whether Novelist Pro is currently active on this device.</li>
 </ul>
-<p>Uninstalling the app removes all of it. If you have iCloud Backup enabled, Apple includes this data in your encrypted iCloud backup — that backup is between you and Apple; we have no access to it.</p>
 
-<h3>Anonymous account</h3>
-<p>On first launch, Novelist creates an <strong>anonymous account</strong> for your device using Firebase Authentication's anonymous sign-in. <strong>No name, email address, or password is ever requested or collected.</strong> This anonymous account exists so our backend can:</p>
+<h3>On our backend (Firebase Cloud Firestore)</h3>
+<p>Because Novelist generates each chapter on our server and continues your story across sessions, <strong>the story content you create is also stored on our backend</strong> (Google's Firebase Cloud Firestore), keyed to your anonymous account ID. This server-side copy — not just the on-device copy — is where your story lives between chapters. It includes:</p>
 <ul>
-  <li>Track your entitlement (whether Novelist Pro is active) so it can be restored if you reinstall or switch devices while signed into the same anonymous session.</li>
-  <li>Meter free-tier usage — Novelist offers a limited number of free chapter generations and regenerations before prompting you to subscribe.</li>
-  <li>Record how much backend/AI usage your account has consumed per day, so we can operate fair usage limits and decide which AI model tier (see below) handles your requests.</li>
+  <li><strong>The story's setup</strong> — the genre, tone, point of view, ending style, pacing, target audience, language, creativity level, and the <strong>premise/idea text</strong> you wrote.</li>
+  <li><strong>Characters you attached to the story</strong> — their names, roles, traits, and descriptions.</li>
+  <li><strong>AI-generated story data</strong> — the outline, title, and topic hashtags Novelist produced for the story.</li>
+  <li><strong>Every chapter's full text</strong>, and the <strong>story "memory"</strong> (a running summary plus tracked characters, world facts, and canon facts used to keep chapters consistent).</li>
+  <li><strong>Per-account operational data</strong> — usage counters (how many chapters you've generated, and daily/hourly counts used for fair-use limits), token/cost totals for the AI generation your account has consumed, and your subscription entitlement (tier, product identifier, and expiry).</li>
 </ul>
-<p>This identifier is a random string tied to your device/app install, not to you personally, and cannot be used by us to look up your name, email, or any other directly-identifying information — we don't have any to look up.</p>
+<p>Because we operate this backend, <strong>our systems can technically access this stored content</strong> — for example, through the administrative tools we use to run usage limits, prevent abuse, monitor cost, and provide support. It is never linked to your name or email, because we don't collect one. We do not sell it, use it for advertising, or share it with anyone except the service providers in Section 5.</p>
 
-<h3>Sent to our backend, and forwarded to Anthropic's AI models</h3>
-<p>When you generate or regenerate a chapter, redirect the plot, or use Fine-Tune steering, the app sends the following to our backend (Firebase Cloud Functions), which forwards it to <strong>Anthropic's Claude AI models</strong> (a "Sonnet" model, or a faster "Haiku" model depending on your usage tier) to write the requested text:</p>
-<ul>
-  <li>The genre, tone, point of view, ending style, pacing, target audience, and writing-style options you selected.</li>
-  <li>The names, archetypes, and descriptions of any characters you created for that story.</li>
-  <li>The previous chapters of that story (so new chapters stay consistent with what came before).</li>
-  <li>Any custom instructions you type into <strong>Fine-Tune</strong> or <strong>Redirect Plot</strong>.</li>
-</ul>
-<p>This content is associated only with your anonymous account ID described above — never with a name or email, because we don't collect one. Anthropic processes this content to generate the requested text; per Anthropic's API terms, content submitted through its API is not used to train Anthropic's models by default. We do not send your character/story content to any other AI vendor, and Discover's bundled library stories are pre-written and never sent anywhere.</p>
+<h3>Sent to Anthropic's AI models to generate text</h3>
+<p>When you generate or regenerate a chapter, add a chapter, redirect the plot, use Fine-Tune steering, or edit a paragraph, our backend sends the material needed to fulfil that request to <strong>Anthropic's Claude AI models</strong> (a "Sonnet" model for prose, or a faster "Haiku" model for utility and rate-limited fallback). This includes your story setup and characters, the running story memory/summary, the tail of the previous chapter (for continuity), and any custom instructions you type into <strong>Fine-Tune</strong>, <strong>Redirect Plot</strong>, or <strong>Edit paragraph</strong>. Generated and submitted text may also be passed through an automated <strong>content-safety check</strong> (also performed by Claude) before it is returned.</p>
+<p>This content is associated only with your anonymous account ID — never with a name or email. Anthropic processes it to generate the requested text and safety result; per Anthropic's commercial API terms, content submitted through its API is not used to train Anthropic's models by default. We do not send your story or character content to any other AI vendor. Discover's bundled library stories are pre-written and are not generated per-user.</p>
 
 <h3>Firebase Analytics</h3>
 <p>We use Firebase Analytics (configured <strong>without</strong> advertising-identifier support — no IDFA, no ad personalization, no cross-app tracking, no ads) to understand feature usage. It collects:</p>
@@ -103,14 +100,13 @@
   <li>Device model, OS version, app version, language, and country (derived from IP, then discarded by Google).</li>
   <li>Categorical feature-usage events — for example: a screen was viewed (by name), a story was generated or regenerated (genre only), a chapter was added, a story was exported (format only), a Discover genre or collection was opened, the free-tier paywall was shown (with a reason code), a subscription plan was viewed/selected, a purchase started/completed/cancelled/failed (product ID and, on failure, a reason code — never price, receipt, or payment details), a purchase was restored, a setting was changed (theme/language — the new value only), or the App Store review prompt was shown/accepted/declined.</li>
 </ul>
-<p><strong>We never send</strong> the text of your stories, character descriptions, Fine-Tune/Redirect Plot instructions, or any other creative content to Analytics — only the categorical events listed above. <strong>We do not request App Tracking Transparency</strong> and never read your device's advertising identifier. <strong>We never tie an analytics event to your name or email</strong>, because we don't have one.</p>
-<p>Novelist does <strong>not</strong> use Firebase Crashlytics or any other crash-reporting or third-party analytics/advertising SDK.</p>
+<p><strong>We never send</strong> the text of your stories, your premise/idea, character descriptions, or your Fine-Tune/Redirect Plot/Edit instructions to Analytics — only the categorical events listed above. <strong>We do not request App Tracking Transparency</strong> and never read your device's advertising identifier. Novelist does <strong>not</strong> use Firebase Crashlytics or any other crash-reporting, or any other third-party analytics/advertising SDK.</p>
 
 <h3>Firebase App Check</h3>
-<p>Novelist uses Firebase App Check to confirm that requests to our backend come from a genuine, unmodified copy of the app (anti-abuse). App Check tokens are attestations about the app binary and device, not personal data.</p>
+<p>Novelist uses Firebase App Check (Apple's App Attest) to confirm that requests to our backend come from a genuine, unmodified copy of the app (anti-abuse). App Check tokens are attestations about the app binary and device, not personal data.</p>
 
 <h3>In-app purchases (Novelist Pro)</h3>
-<p>Novelist offers <strong>Novelist Pro</strong>, an auto-renewing subscription (weekly, monthly, or yearly) handled entirely through Apple's StoreKit 2. <strong>Apple processes the payment</strong> — your card and billing details are never seen by the app or by us. The app stores locally whether Pro is currently active. As described above, Analytics receives only non-financial purchase events (product identifier and outcome) — never your payment method, receipt, or transaction ID. <strong>Restore Purchases</strong> asks Apple (not us) which products are tied to your Apple Account.</p>
+<p>Novelist offers <strong>Novelist Pro</strong>, an auto-renewing subscription (weekly, monthly, or yearly) handled entirely through Apple's StoreKit 2. <strong>Apple processes the payment</strong> — your card and billing details are never seen by the app or by us. Your entitlement status is stored locally and on our backend (keyed to your anonymous ID) so limits and access work correctly. As described above, Analytics receives only non-financial purchase events (product identifier and outcome) — never your payment method, receipt, or transaction ID. <strong>Restore Purchases</strong> asks Apple (not us) which products are tied to your Apple Account.</p>
 
 <h3>Export and sharing</h3>
 <p>Novelist can export a story as EPUB, PDF, or plain text and hand it to iOS's standard share sheet. Where that file goes next (Files, Mail, Messages, AirDrop, a third-party app, etc.) is entirely your choice — we never receive a copy.</p>
@@ -127,9 +123,9 @@
 
 <h2>4. How we use this data</h2>
 <ul>
-  <li><strong>Local data</strong> (stories, characters, settings) powers the app's core features for you and is not used for anything else.</li>
-  <li><strong>Your anonymous account</strong> lets us apply free-tier limits fairly, keep your Pro entitlement in sync across reinstalls, and route requests to the right AI model tier.</li>
-  <li><strong>Story/character content sent to Anthropic</strong> exists solely to generate the chapter, plot redirection, or fine-tuned continuation you asked for.</li>
+  <li><strong>On-device data</strong> gives you fast, offline-friendly access to your library and settings.</li>
+  <li><strong>Your anonymous account and server-side story data</strong> let our backend generate chapters, continue your story across sessions with consistency, apply free-tier and fair-use limits, keep your Pro entitlement in sync, prevent abuse, and monitor operating cost.</li>
+  <li><strong>Content sent to Anthropic</strong> exists solely to generate the chapter, plot redirection, edit, or continuation you asked for, and to screen it for safety.</li>
   <li><strong>Firebase Analytics</strong> tells us, in aggregate, which features are used and where people get stuck (e.g., at the paywall) so we can decide what to fix or improve. We look at counts, not individuals.</li>
 </ul>
 <p>We do <strong>not</strong> sell your personal information, and we do not share it for cross-context behavioural advertising (as those terms are defined under the CCPA/CPRA). We do not build advertising profiles or share data with data brokers.</p>
@@ -138,8 +134,8 @@
 
 <h2>5. Who we share data with</h2>
 <ul>
-  <li><strong>Google LLC</strong> (and, for EEA/UK/Swiss users, Google Ireland Limited) operates <strong>Firebase</strong> — Authentication, Cloud Functions, App Check, and Analytics — as our service provider, under the <a href="https://firebase.google.com/terms/data-processing-terms">Firebase Data Processing Terms</a> and <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</li>
-  <li><strong>Anthropic, PBC</strong> processes the story/character content described in Section 2 through its Claude API to generate text, under <a href="https://www.anthropic.com/legal/privacy">Anthropic's Privacy Policy</a> and <a href="https://www.anthropic.com/legal/commercial-terms">Commercial Terms of Service</a>.</li>
+  <li><strong>Google LLC</strong> (and, for EEA/UK/Swiss users, Google Ireland Limited) operates <strong>Firebase</strong> — Authentication, Cloud Functions, <strong>Cloud Firestore</strong> (which stores your story content), App Check, and Analytics — as our service provider, under the <a href="https://firebase.google.com/terms/data-processing-terms">Firebase Data Processing Terms</a> and <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</li>
+  <li><strong>Anthropic, PBC</strong> processes the story/character content described in Section 2 through its Claude API to generate and safety-check text, under <a href="https://www.anthropic.com/legal/privacy">Anthropic's Privacy Policy</a> and <a href="https://www.anthropic.com/legal/commercial-terms">Commercial Terms of Service</a>.</li>
   <li><strong>Apple Inc.</strong> processes your in-app purchases under the <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a>.</li>
   <li>We may also disclose information where required by valid legal process.</li>
 </ul>
@@ -149,9 +145,9 @@
 
 <h2>6. How long we keep it</h2>
 <ul>
-  <li><strong>Local data</strong> — kept on your device until you delete it or uninstall the app.</li>
-  <li><strong>Story/character content sent for generation</strong> — used to produce the response and not retained by us beyond what's needed to serve that request and to operate short-lived abuse/rate-limit safeguards; Anthropic's retention of API content is governed by its own terms, linked above.</li>
-  <li><strong>Anonymous account and usage-metering data</strong> — retained for as long as your account is active (i.e., the app remains installed and in use), so entitlement and free-tier limits keep working correctly.</li>
+  <li><strong>On-device data</strong> — kept on your device until you delete it in the app or uninstall the app.</li>
+  <li><strong>Server-side story content</strong> (setup, premise, characters, outline, chapter text, and story memory in Firestore) — retained on our backend until it is deleted on request. <strong>Important:</strong> deleting a story inside the app removes the copy on your device, but does <strong>not</strong> automatically delete the copy on our backend, and neither does uninstalling the app. There is no automatic expiry. To have your server-side content erased, email us (see Section 7).</li>
+  <li><strong>Anonymous account, usage counters, spend totals, and entitlement</strong> — retained on our backend so limits and access keep working; erased on request as above.</li>
   <li><strong>Firebase Analytics</strong> — retained by Google per Firebase's default event retention (up to 14 months).</li>
 </ul>
 
@@ -159,9 +155,10 @@
 
 <h2>7. Your rights and choices</h2>
 <ul>
-  <li><strong>Delete or edit</strong> any story, character, or setting directly in the app; uninstall the app to remove all local data and reset your anonymous account.</li>
+  <li><strong>Edit or delete on your device</strong> — change or delete any story, character, or setting directly in the app; uninstalling removes all on-device data.</li>
+  <li><strong>Erase your server-side content</strong> — because we don't collect a name or email, we can't look you up automatically. Email <strong>mukashi.dev@gmail.com</strong> to request deletion of the story content and account data stored on our backend, and we will locate and erase it. (If you still have the app installed, mention that so we can help identify your account ID.)</li>
   <li><strong>Turn off analytics system-wide</strong> — iOS <strong>Settings → Privacy &amp; Security → Analytics &amp; Improvements → Share iPhone Analytics</strong>.</li>
-  <li><strong>Access or erasure</strong> under GDPR (EEA/UK), CCPA/CPRA (California), or similar laws — email <strong>mukashi.dev@gmail.com</strong>. Because we don't collect a name or email through the app itself, the most reliable way to reset your data is uninstalling the app, which invalidates your anonymous account and local data.</li>
+  <li><strong>Access or erasure</strong> under GDPR (EEA/UK), CCPA/CPRA (California), or similar laws — email <strong>mukashi.dev@gmail.com</strong> and we'll respond within 30 days.</li>
   <li><strong>Lodge a complaint</strong> with your local data-protection authority if you're in the EEA, UK, or Switzerland — though we'd appreciate the chance to help first.</li>
 </ul>
 
@@ -174,9 +171,10 @@
 
 <h2>9. Security</h2>
 <ul>
-  <li>Local data is stored in iOS's app sandbox.</li>
+  <li>On-device data is stored in iOS's app sandbox.</li>
+  <li>Server-side story content is stored in Firebase Cloud Firestore, protected by owner-scoped security rules so one anonymous account cannot read another's stories. Administrative access is limited to us as the operator, for running and supporting the service.</li>
   <li>Data sent to our backend, Anthropic, and Firebase travels over HTTPS (TLS).</li>
-  <li>We operate a minimal server footprint by design — no account database of names/emails, no payment data. No method is perfectly secure, but we keep our data footprint deliberately small and will notify you of a breach as required by law.</li>
+  <li>We deliberately keep our data footprint small — no name/email account database, no payment data. No method is perfectly secure, but we will notify you of a breach as required by applicable law.</li>
 </ul>
 
 <hr>
