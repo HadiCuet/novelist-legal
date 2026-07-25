@@ -1,6 +1,6 @@
 # Novelist — Privacy Policy
 
-**Effective date:** July 12, 2026
+**Effective date:** July 25, 2026
 
 Novelist is an AI-assisted story-writing app: you pick a genre and a few options, create characters, and Novelist writes chapters with you — plus a bundled "Discover" library of ready-to-read stories. This policy explains, in plain English, what data the app handles and the choices you have.
 
@@ -52,7 +52,7 @@ We use Firebase Analytics (configured **without** advertising-identifier support
 
 - A per-install device identifier (a Firebase app-instance ID) that resets if you reinstall.
 - Device model, OS version, app version, language, and country (derived from IP, then discarded by Google).
-- Categorical feature-usage events — for example: a screen was viewed (by name), a story was generated or regenerated (genre only), a chapter was added, a story was exported (format only), a Discover genre or collection was opened, the free-tier paywall was shown (with a reason code), a subscription plan was viewed/selected, a purchase started/completed/cancelled/failed (product ID and, on failure, a reason code — never price, receipt, or payment details), a purchase was restored, a setting was changed (theme/language — the new value only), or the App Store review prompt was shown/accepted/declined.
+- Categorical feature-usage events — for example: a screen was viewed (by name), onboarding was completed (how, and at which slide), a story generation was requested (genre and length) or was blocked by the free-tier paywall (with a reason code), a story was generated or regenerated (genre only), a chapter was added, a story was opened (from where), finished, or deleted, the Fine-Tune sheet was opened, a story was exported (format only), a Discover genre or collection was opened, a subscription plan was viewed or selected, a purchase started/completed/cancelled/failed (product ID and, on failure, a reason code — never price, receipt, or payment details), a purchase restore was started and its outcome recorded, the theme setting was changed (the new value only), or the App Store review prompt was shown (with a trigger reason).
 
 **We never send** the text of your stories, your premise/idea, character descriptions, or your Fine-Tune/Redirect Plot/Edit instructions to Analytics — only the categorical events listed above. **We do not request App Tracking Transparency** and never read your device's advertising identifier. Novelist does **not** use Firebase Crashlytics or any other crash-reporting, or any other third-party analytics/advertising SDK.
 
@@ -64,9 +64,21 @@ Novelist uses Firebase App Check (Apple's App Attest) to confirm that requests t
 
 Novelist offers **Novelist Pro**, an auto-renewing subscription (weekly, monthly, or yearly) handled entirely through Apple's StoreKit 2. **Apple processes the payment** — your card and billing details are never seen by the app or by us. Your entitlement status is stored locally and on our backend (keyed to your anonymous ID) so limits and access work correctly. As described above, Analytics receives only non-financial purchase events (product identifier and outcome) — never your payment method, receipt, or transaction ID. **Restore Purchases** asks Apple (not us) which products are tied to your Apple Account.
 
-### Export and sharing
+### Export, sharing, and story cards
 
-Novelist can export a story as EPUB, PDF, or plain text and hand it to iOS's standard share sheet. Where that file goes next (Files, Mail, Messages, AirDrop, a third-party app, etc.) is entirely your choice — we never receive a copy.
+Novelist can export a story as **EPUB, PDF, plain text, or story-card images (PNG)** and hands the result to iOS's standard share sheet. Where that file goes next (Files, Mail, Messages, AirDrop, a third-party app, etc.) is entirely your choice — we never receive a copy.
+
+If you pick **Save Image** for a story card, iOS asks for permission to **add** to your photo library. Novelist requests add-only access: it can place the exported image there and **cannot read, browse, or list your photos**.
+
+### Dictation (microphone and speech recognition)
+
+Novelist lets you **speak** your story idea or a steering instruction instead of typing it. This happens only when you tap the microphone button:
+
+- The first time, iOS asks for **Microphone** and **Speech Recognition** permission. You can decline, and everything else in the app keeps working.
+- Audio is captured only while dictation is running, and stops the moment you finish or leave the screen.
+- **We never receive or store the audio.** It is not sent to our backend, to Anthropic, or to Analytics.
+- Transcription runs **on your device** wherever iOS supports on-device recognition for your language. Where it does not, iOS sends the audio to **Apple's** speech-recognition service to transcribe it, under the [Apple Privacy Policy](https://www.apple.com/legal/privacy/). That exchange is between you and Apple; we have no access to it.
+- The **transcribed text** simply appears in the text box, exactly as if you had typed it. From there it is treated like any other text you type — if you then generate a story, it travels to our backend and to Anthropic as described above.
 
 ### Narration
 
@@ -76,7 +88,13 @@ The "Listen" feature uses Apple's on-device `AVSpeechSynthesizer` (the system te
 
 ## 3. Permissions the app asks for
 
-Novelist does not request access to the camera, microphone, photo library, contacts, location, motion data, or notifications. It has no need for any of them.
+Novelist asks for three optional permissions, each only at the moment you first use the feature that needs it. Decline any of them and the rest of the app keeps working normally.
+
+- **Microphone** — to capture audio while you dictate a story idea or a steering instruction, and only while dictation is active.
+- **Speech Recognition** — to turn that audio into text (see "Dictation" in Section 2).
+- **Photo library (add only)** — so iOS can save an exported story-card image if you choose "Save Image" from the share sheet. Novelist cannot read, browse, or list your photos.
+
+Novelist does **not** request access to the camera, contacts, location, motion data, notifications, calendars, or health data.
 
 ---
 
@@ -85,6 +103,7 @@ Novelist does not request access to the camera, microphone, photo library, conta
 - **On-device data** gives you fast, offline-friendly access to your library and settings.
 - **Your anonymous account and server-side story data** let our backend generate chapters, continue your story across sessions with consistency, apply free-tier and fair-use limits, keep your Pro entitlement in sync, prevent abuse, and monitor operating cost.
 - **Content sent to Anthropic** exists solely to generate the chapter, plot redirection, edit, or continuation you asked for, and to screen it for safety.
+- **Dictated audio** is used only to produce the text that appears in the box you are typing into. We never receive or store it.
 - **Firebase Analytics** tells us, in aggregate, which features are used and where people get stuck (e.g., at the paywall) so we can decide what to fix or improve. We look at counts, not individuals.
 
 We do **not** sell your personal information, and we do not share it for cross-context behavioural advertising (as those terms are defined under the CCPA/CPRA). We do not build advertising profiles or share data with data brokers.
@@ -95,7 +114,7 @@ We do **not** sell your personal information, and we do not share it for cross-c
 
 - **Google LLC** (and, for EEA/UK/Swiss users, Google Ireland Limited) operates **Firebase** — Authentication, Cloud Functions, **Cloud Firestore** (which stores your story content), App Check, and Analytics — as our service provider, under the [Firebase Data Processing Terms](https://firebase.google.com/terms/data-processing-terms) and [Google Privacy Policy](https://policies.google.com/privacy).
 - **Anthropic, PBC** processes the story/character content described in Section 2 through its Claude API to generate and safety-check text, under [Anthropic's Privacy Policy](https://www.anthropic.com/legal/privacy) and [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms).
-- **Apple Inc.** processes your in-app purchases under the [Apple Privacy Policy](https://www.apple.com/legal/privacy/).
+- **Apple Inc.** processes your in-app purchases and, where on-device speech recognition is unavailable for your language, transcribes dictated audio, under the [Apple Privacy Policy](https://www.apple.com/legal/privacy/).
 - We may also disclose information where required by valid legal process.
 
 No other third-party analytics, advertising, or tracking SDK is bundled in the app. These providers primarily process data on servers in the **United States**; for EEA/UK/Swiss users, international transfers rely on Standard Contractual Clauses incorporated into each provider's terms.
