@@ -26,7 +26,7 @@ The app keeps a local copy of your content on your device (using Apple's SwiftDa
 - **Characters** in your character library and the running **story memory** Novelist keeps so later chapters stay consistent.
 - **Discover reading progress** — which bundled stories you've opened or finished.
 - **Settings** — theme, language, reader preferences, onboarding state, the **pen name** you choose to show on your covers and exports, narration voice and speed, and the time of any **bedtime-series** reminder.
-- **A cover photo you choose** — if you replace a story's cover with one of your own photos, that photo is copied into the app and **stays on your device**. It is never uploaded.
+- **Your cover design** — if you replace a story's cover with your own picture (from Photos, Files, or the camera), that picture is copied into the app and **stays on your device**. It is never uploaded. The same goes for how you style the cover: its framing, filters, fonts, colours, subtitle, and the name you set on it.
 - **Purchase/entitlement state** — whether Novelist Pro is currently active on this device.
 
 ### On our backend (Firebase Cloud Firestore)
@@ -82,7 +82,7 @@ Novelist offers **Novelist Pro**, an auto-renewing subscription (weekly, monthly
 
 Novelist can export a story as **EPUB, PDF, plain text, or story-card images (PNG)** — with its cover and your pen name — and hands the result to iOS's standard share sheet. Where that file goes next (Files, Mail, Messages, AirDrop, a third-party app, etc.) is entirely your choice — we never receive a copy.
 
-If you pick **Save Image** for a story card, iOS asks for permission to **add** to your photo library. Novelist requests add-only access: it can place the exported image there and **cannot read, browse, or list your photos**.
+If you pick **Save Image** for a story card or a cover, iOS asks for permission to **add** to your photo library. Novelist requests add-only access: it can place the exported image there and **cannot read, browse, or list your photos**.
 
 ### Dictation (microphone and speech recognition)
 
@@ -106,16 +106,17 @@ If you turn them on, Novelist schedules **local notifications** on your device: 
 
 ## 3. Permissions the app asks for
 
-Novelist asks for four optional permissions, each only at the moment you first use the feature that needs it. Decline any of them and the rest of the app keeps working normally.
+Novelist asks for five optional permissions, each only at the moment you first use the feature that needs it. Decline any of them and the rest of the app keeps working normally.
 
 - **Microphone** — to capture audio while you dictate a story idea or a steering instruction, and only while dictation is active.
 - **Speech Recognition** — to turn that audio into text (see "Dictation" in Section 2).
-- **Photo library (add only)** — so iOS can save an exported story-card image if you choose "Save Image" from the share sheet. Novelist cannot read, browse, or list your photos.
+- **Photo library (add only)** — so iOS can save an exported story-card image or cover if you choose "Save Image" from the share sheet. Novelist cannot read, browse, or list your photos.
 - **Notifications** — for the optional next-chapter and bedtime-series reminders (see "Reminders" in Section 2).
+- **Camera** — only if you choose **Camera** in the cover editor to take a photo for a story's cover. The photo stays on your device.
 
-To use your own photo as a cover, Novelist uses iOS's **photo picker**, which needs no permission: the app receives only the one photo you pick and cannot see the rest of your library.
+To use your own photo as a cover, Novelist uses iOS's **photo picker** or the **Files** browser, which need no permission: the app receives only the one picture you pick and cannot see the rest of your library or your files.
 
-Novelist does **not** request access to the camera, contacts, location, motion data, calendars, or health data.
+Novelist does **not** request access to contacts, location, motion data, calendars, or health data.
 
 ---
 
