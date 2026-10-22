@@ -1,6 +1,6 @@
 # Novelist — Privacy Policy
 
-**Effective date:** October 22, 2026
+**Effective date:** October 23, 2026
 
 Novelist is an AI-assisted story-writing app: you pick a genre and a few options, create characters, and Novelist writes chapters with you — plus a bundled "Discover" library of ready-to-read stories. This policy explains, in plain English, what data the app handles and the choices you have.
 
@@ -25,8 +25,8 @@ The app keeps a local copy of your content on your device (using Apple's SwiftDa
 - **Your stories and chapters** — titles and the full chapter text.
 - **Characters** in your character library and the running **story memory** Novelist keeps so later chapters stay consistent.
 - **Discover reading progress** — which bundled stories you've opened or finished.
-- **Settings** — theme, language, reader preferences, onboarding state, the **pen name** you choose to show on your covers and exports, narration voice and speed, and the time of any **bedtime-series** reminder.
-- **Your cover design** — if you replace a story's cover with your own picture (from Photos, Files, or the camera), that picture is copied into the app and **stays on your device**. It is never uploaded. The same goes for how you style the cover: its framing, filters, fonts, colours, subtitle, and the name you set on it.
+- **Settings** — theme, language, reader preferences, onboarding state, the **pen name** you choose to show on your covers and exports, narration voice and speed, the time of any **bedtime-series** reminder, and the Fine-Tune choices you last used, so your next story starts from them.
+- **Your cover design** — if you replace a story's cover with your own picture (from Photos, Files, or the camera), that picture is copied into the app and **stays on your device**. It is never uploaded. The same goes for how you style the cover: its framing, filters, fonts, colours and subtitle. A story's title and the name on its cover leave your device only if you share the story as a link (see "Sharing" below).
 - **Purchase/entitlement state** — whether Novelist Pro is currently active on this device.
 
 ### On our backend (Firebase Cloud Firestore)
@@ -44,7 +44,7 @@ Because we operate this backend, **our systems can technically access this store
 
 ### Sent to Anthropic's AI models to generate text
 
-When you generate or regenerate a chapter, add a chapter, pick a suggested direction, redirect the plot, use Fine-Tune steering, or edit a paragraph — and when a chapter's extras (title, suggestions, recap, character list), a novel's plan, or a cover description are prepared — our backend sends the material needed to fulfil that request to **Anthropic's Claude AI models** (a "Sonnet" model for prose, or a faster "Haiku" model for utility and rate-limited fallback). This includes your story setup and characters, the running story memory/summary, the tail of the previous chapter (for continuity), and any custom instructions you type into **Fine-Tune**, **Redirect Plot**, or **Edit paragraph**. Generated and submitted text may also be passed through an automated **content-safety check** (also performed by Claude) before it is returned.
+When you generate or regenerate a chapter, add a chapter, pick a suggested direction, redirect the plot, use Fine-Tune steering, or edit a paragraph — and when a chapter's extras (title, suggestions, recap, character list), a novel's plan, or a cover description are prepared — our backend sends the material needed to fulfil that request to **Anthropic's Claude AI models** (a "Sonnet" model for prose, or a faster "Haiku" model for utility and rate-limited fallback). This includes your story setup and characters (including anything you ask the story to include or leave out, and a child's reading age if you choose one), the running story memory/summary, the tail of the previous chapter (for continuity), and any custom instructions you type into **Fine-Tune**, **Redirect Plot**, or **Edit paragraph**. Generated and submitted text may also be passed through an automated **content-safety check** (also performed by Claude) before it is returned.
 
 This content is associated only with your anonymous account ID — never with a name or email. Anthropic processes it to generate the requested text and safety result; per Anthropic's commercial API terms, content submitted through its API is not used to train Anthropic's models by default. We do not send your story text to any other AI vendor; the only thing another AI vendor receives is the short cover description described under "Cover images" below. Discover's bundled library stories are pre-written and are not generated per-user.
 
@@ -54,7 +54,7 @@ Each story can get **one** cover picture. To make it, our backend first asks Cla
 
 ### Shared chapters and gifts
 
-Sharing is optional and happens only when you tap **Share chapter one as a link** or **Gift this story**. When you do, we publish a **read-only copy** of that story's **title, first chapter, cover image, and the pen name you entered** — and, for a gift, the recipient's name and your note — on a web page at an unlisted address (`mukashi-novelist.web.app/s/` followed by a random code). Anyone you give the link to, and anyone they pass it on to, can read that page. The page is not listed anywhere, is marked so search engines don't index it, and does not show any other part of your story or account.
+Sharing is optional and happens only when you tap **Share chapter one as a link** or **Gift this story**. When you do, we publish a **read-only copy** of that story's **title, first chapter, generated cover image, and the name on its cover** — and, for a gift, the recipient's name and your note — on a web page at an unlisted address (`mukashi-novelist.web.app/s/` followed by a random code). Anyone you give the link to, and anyone they pass it on to, can read that page. The page is not listed anywhere, is marked so search engines don't index it, and does not show any other part of your story or account.
 
 - **Stop sharing at any time** in the app's Share & export sheet. This switches off that story's link and every gift link you made for it, and within about a minute the page says the story isn't available. Deleting the story in the app switches its links off too.
 - When someone opens the page, their browser sends the usual request data (such as IP address and browser type) to Google's Firebase Hosting, which serves it. We keep only a **count** of page views and of taps on the button that opens the App Store — not who viewed.
