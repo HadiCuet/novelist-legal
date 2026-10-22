@@ -53,12 +53,15 @@
 <main>
 
 <h1>Novelist — Privacy Policy</h1>
-<p class="effective"><strong>Effective date:</strong> July 25, 2026</p>
+
+<p class="effective"><strong>Effective date:</strong> October 22, 2026</p>
+
 <p class="intro">Novelist is an AI-assisted story-writing app: you pick a genre and a few options, create characters, and Novelist writes chapters with you — plus a bundled "Discover" library of ready-to-read stories. This policy explains, in plain English, what data the app handles and the choices you have.</p>
 
 <hr>
 
 <h2>1. Who we are</h2>
+
 <p>Novelist is an iOS app developed and operated by <strong>Abdullah Al Hadi</strong> (publishing as Mukashi) ("we", "us"). For the purposes of the EU/UK/EEA General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA/CPRA), Abdullah Al Hadi is the <strong>data controller</strong> for personal data handled through the app. For any privacy question, contact <strong>mukashi.dev@gmail.com</strong>.</p>
 
 <hr>
@@ -66,54 +69,87 @@
 <h2>2. Data we collect</h2>
 
 <h3>An anonymous account (no name, email, or password)</h3>
+
 <p>On first launch, Novelist creates an <strong>anonymous account</strong> for your device using Firebase Authentication's anonymous sign-in. <strong>No name, email address, phone number, or password is ever requested or collected.</strong> This anonymous account is a random identifier tied to your app install; we cannot use it to look up who you are, because we hold no directly-identifying information about you. Everything our backend stores (below) is keyed to this anonymous ID.</p>
 
 <h3>On your device</h3>
+
 <p>The app keeps a local copy of your content on your device (using Apple's SwiftData framework and iOS user defaults) so it works smoothly and can be read back quickly:</p>
+
 <ul>
   <li><strong>Your stories and chapters</strong> — titles and the full chapter text.</li>
   <li><strong>Characters</strong> in your character library and the running <strong>story memory</strong> Novelist keeps so later chapters stay consistent.</li>
   <li><strong>Discover reading progress</strong> — which bundled stories you've opened or finished.</li>
-  <li><strong>Settings</strong> — theme, language, reader preferences, and onboarding state.</li>
+  <li><strong>Settings</strong> — theme, language, reader preferences, onboarding state, the <strong>pen name</strong> you choose to show on your covers and exports, narration voice and speed, and the time of any <strong>bedtime-series</strong> reminder.</li>
+  <li><strong>A cover photo you choose</strong> — if you replace a story's cover with one of your own photos, that photo is copied into the app and <strong>stays on your device</strong>. It is never uploaded.</li>
   <li><strong>Purchase/entitlement state</strong> — whether Novelist Pro is currently active on this device.</li>
 </ul>
 
 <h3>On our backend (Firebase Cloud Firestore)</h3>
+
 <p>Because Novelist generates each chapter on our server and continues your story across sessions, <strong>the story content you create is also stored on our backend</strong> (Google's Firebase Cloud Firestore), keyed to your anonymous account ID. This server-side copy — not just the on-device copy — is where your story lives between chapters. It includes:</p>
+
 <ul>
   <li><strong>The story's setup</strong> — the genre, tone, point of view, ending style, pacing, target audience, language, creativity level, and the <strong>premise/idea text</strong> you wrote.</li>
   <li><strong>Characters you attached to the story</strong> — their names, roles, traits, and descriptions.</li>
-  <li><strong>AI-generated story data</strong> — the outline, title, and topic hashtags Novelist produced for the story.</li>
+  <li><strong>AI-generated story data</strong> — the outline, title, and topic hashtags Novelist produced for the story; for a story started as <strong>a novel</strong>, a private plan of its chapters; and for each chapter, a title, three suggested directions for the next chapter, a short recap, one quoted line, and a list of the characters and places so far.</li>
+  <li><strong>The story's cover image</strong> — the one picture generated for the story (see "Cover images" below), stored as an image file in Google Cloud Storage at an unlisted address that includes a random code.</li>
   <li><strong>Every chapter's full text</strong>, and the <strong>story "memory"</strong> (a running summary plus tracked characters, world facts, and canon facts used to keep chapters consistent).</li>
   <li><strong>Per-account operational data</strong> — usage counters (how many chapters you've generated, and daily/hourly counts used for fair-use limits), token/cost totals for the AI generation your account has consumed, and your subscription entitlement (tier, product identifier, and expiry).</li>
 </ul>
+
 <p>Because we operate this backend, <strong>our systems can technically access this stored content</strong> — for example, through the administrative tools we use to run usage limits, prevent abuse, monitor cost, and provide support. It is never linked to your name or email, because we don't collect one. We do not sell it, use it for advertising, or share it with anyone except the service providers in Section 5.</p>
 
 <h3>Sent to Anthropic's AI models to generate text</h3>
-<p>When you generate or regenerate a chapter, add a chapter, redirect the plot, use Fine-Tune steering, or edit a paragraph, our backend sends the material needed to fulfil that request to <strong>Anthropic's Claude AI models</strong> (a "Sonnet" model for prose, or a faster "Haiku" model for utility and rate-limited fallback). This includes your story setup and characters, the running story memory/summary, the tail of the previous chapter (for continuity), and any custom instructions you type into <strong>Fine-Tune</strong>, <strong>Redirect Plot</strong>, or <strong>Edit paragraph</strong>. Generated and submitted text may also be passed through an automated <strong>content-safety check</strong> (also performed by Claude) before it is returned.</p>
-<p>This content is associated only with your anonymous account ID — never with a name or email. Anthropic processes it to generate the requested text and safety result; per Anthropic's commercial API terms, content submitted through its API is not used to train Anthropic's models by default. We do not send your story or character content to any other AI vendor. Discover's bundled library stories are pre-written and are not generated per-user.</p>
+
+<p>When you generate or regenerate a chapter, add a chapter, pick a suggested direction, redirect the plot, use Fine-Tune steering, or edit a paragraph — and when a chapter's extras (title, suggestions, recap, character list), a novel's plan, or a cover description are prepared — our backend sends the material needed to fulfil that request to <strong>Anthropic's Claude AI models</strong> (a "Sonnet" model for prose, or a faster "Haiku" model for utility and rate-limited fallback). This includes your story setup and characters, the running story memory/summary, the tail of the previous chapter (for continuity), and any custom instructions you type into <strong>Fine-Tune</strong>, <strong>Redirect Plot</strong>, or <strong>Edit paragraph</strong>. Generated and submitted text may also be passed through an automated <strong>content-safety check</strong> (also performed by Claude) before it is returned.</p>
+
+<p>This content is associated only with your anonymous account ID — never with a name or email. Anthropic processes it to generate the requested text and safety result; per Anthropic's commercial API terms, content submitted through its API is not used to train Anthropic's models by default. We do not send your story text to any other AI vendor; the only thing another AI vendor receives is the short cover description described under "Cover images" below. Discover's bundled library stories are pre-written and are not generated per-user.</p>
+
+<h3>Cover images</h3>
+
+<p>Each story can get <strong>one</strong> cover picture. To make it, our backend first asks Claude (see above) to write a short description of a scene from the story's genre, tone, premise, and characters, instructed to describe people only by appearance and never by a real person's name. That description can mention your characters' names and looks, but it never includes your story text or anything that identifies you. It is sent to <strong>fal.ai</strong> (Features and Labels, Inc.), which generates the image with an image model we choose: <strong>Muse Image</strong> by Meta, <strong>Nano Banana</strong> by Google, or <strong>FLUX</strong> by Black Forest Labs. FLUX runs on fal.ai's own servers; for Muse Image or Nano Banana, fal.ai passes the description on to Meta or Google, which draws the picture. We ask fal.ai to return the image directly rather than keep it in its request history. The image is then stored with your story as described above. Covers are capped per day, and your own cover photo (if you choose one) never leaves your device.</p>
+
+<h3>Shared chapters and gifts</h3>
+
+<p>Sharing is optional and happens only when you tap <strong>Share chapter one as a link</strong> or <strong>Gift this story</strong>. When you do, we publish a <strong>read-only copy</strong> of that story's <strong>title, first chapter, cover image, and the pen name you entered</strong> — and, for a gift, the recipient's name and your note — on a web page at an unlisted address (<code>mukashi-novelist.web.app/s/</code> followed by a random code). Anyone you give the link to, and anyone they pass it on to, can read that page. The page is not listed anywhere, is marked so search engines don't index it, and does not show any other part of your story or account.</p>
+
+<ul>
+  <li><strong>Stop sharing at any time</strong> in the app's Share &amp; export sheet. This switches off that story's link and every gift link you made for it, and within about a minute the page says the story isn't available. Deleting the story in the app switches its links off too.</li>
+  <li>When someone opens the page, their browser sends the usual request data (such as IP address and browser type) to Google's Firebase Hosting, which serves it. We keep only a <strong>count</strong> of page views and of taps on the button that opens the App Store — not who viewed.</li>
+  <li>Every shared page has a <strong>Report this story</strong> form. A report stores the reason chosen and a one-way hash of the reporter's IP address (to stop duplicate reports); after three reports a page is hidden automatically, and we may review, hide, or remove any shared page.</li>
+</ul>
 
 <h3>Firebase Analytics</h3>
+
 <p>We use Firebase Analytics (configured <strong>without</strong> advertising-identifier support — no IDFA, no ad personalization, no cross-app tracking, no ads) to understand feature usage. It collects:</p>
+
 <ul>
   <li>A per-install device identifier (a Firebase app-instance ID) that resets if you reinstall.</li>
   <li>Device model, OS version, app version, language, and country (derived from IP, then discarded by Google).</li>
-  <li>Categorical feature-usage events — for example: a screen was viewed (by name), onboarding was completed (how, and at which slide), a story generation was requested (genre and length) or was blocked by the free-tier paywall (with a reason code), a story was generated or regenerated (genre only), a chapter was added, a story was opened (from where), finished, or deleted, the Fine-Tune sheet was opened, a story was exported (format only), a Discover genre or collection was opened, a subscription plan was viewed or selected, a purchase started/completed/cancelled/failed (product ID and, on failure, a reason code — never price, receipt, or payment details), a purchase restore was started and its outcome recorded, the theme setting was changed (the new value only), or the App Store review prompt was shown (with a trigger reason).</li>
+  <li>Categorical feature-usage events — for example: a screen was viewed (by name), onboarding was completed (how, and at which slide), a story generation was requested (genre and length) or was blocked by the free-tier paywall (with a reason code), a story was generated or regenerated (genre only), a chapter was added, a story was opened (from where), finished, or deleted, the Fine-Tune sheet was opened, a story was exported (format only), a suggested next-chapter direction was picked, your own cover photo was chosen, a share link was created (and whether it was a gift), a bedtime series was started, narration was started (with the quality level of the voice, such as "Premium"), a Discover genre or collection was opened, a subscription plan was viewed or selected, a purchase started/completed/cancelled/failed (product ID and, on failure, a reason code — never price, receipt, or payment details), a purchase restore was started and its outcome recorded, the theme setting was changed (the new value only), or the App Store review prompt was shown (with a trigger reason).</li>
 </ul>
+
 <p><strong>We never send</strong> the text of your stories, your premise/idea, character descriptions, or your Fine-Tune/Redirect Plot/Edit instructions to Analytics — only the categorical events listed above. <strong>We do not request App Tracking Transparency</strong> and never read your device's advertising identifier. Novelist does <strong>not</strong> use Firebase Crashlytics or any other crash-reporting, or any other third-party analytics/advertising SDK.</p>
 
 <h3>Firebase App Check</h3>
+
 <p>Novelist uses Firebase App Check (Apple's App Attest) to confirm that requests to our backend come from a genuine, unmodified copy of the app (anti-abuse). App Check tokens are attestations about the app binary and device, not personal data.</p>
 
 <h3>In-app purchases (Novelist Pro)</h3>
+
 <p>Novelist offers <strong>Novelist Pro</strong>, an auto-renewing subscription (weekly, monthly, or yearly) handled entirely through Apple's StoreKit 2. <strong>Apple processes the payment</strong> — your card and billing details are never seen by the app or by us. Your entitlement status is stored locally and on our backend (keyed to your anonymous ID) so limits and access work correctly. As described above, Analytics receives only non-financial purchase events (product identifier and outcome) — never your payment method, receipt, or transaction ID. <strong>Restore Purchases</strong> asks Apple (not us) which products are tied to your Apple Account.</p>
 
 <h3>Export, sharing, and story cards</h3>
-<p>Novelist can export a story as <strong>EPUB, PDF, plain text, or story-card images (PNG)</strong> and hands the result to iOS's standard share sheet. Where that file goes next (Files, Mail, Messages, AirDrop, a third-party app, etc.) is entirely your choice — we never receive a copy.</p>
+
+<p>Novelist can export a story as <strong>EPUB, PDF, plain text, or story-card images (PNG)</strong> — with its cover and your pen name — and hands the result to iOS's standard share sheet. Where that file goes next (Files, Mail, Messages, AirDrop, a third-party app, etc.) is entirely your choice — we never receive a copy.</p>
+
 <p>If you pick <strong>Save Image</strong> for a story card, iOS asks for permission to <strong>add</strong> to your photo library. Novelist requests add-only access: it can place the exported image there and <strong>cannot read, browse, or list your photos</strong>.</p>
 
 <h3>Dictation (microphone and speech recognition)</h3>
+
 <p>Novelist lets you <strong>speak</strong> your story idea or a steering instruction instead of typing it. This happens only when you tap the microphone button:</p>
+
 <ul>
   <li>The first time, iOS asks for <strong>Microphone</strong> and <strong>Speech Recognition</strong> permission. You can decline, and everything else in the app keeps working.</li>
   <li>Audio is captured only while dictation is running, and stops the moment you finish or leave the screen.</li>
@@ -123,48 +159,69 @@
 </ul>
 
 <h3>Narration</h3>
-<p>The "Listen" feature uses Apple's on-device <code>AVSpeechSynthesizer</code> (the system text-to-speech engine already built into iOS). Narration happens entirely on your device — no story text is sent anywhere to produce it, and there is no cloud text-to-speech vendor involved.</p>
+
+<p>The "Listen" feature uses Apple's on-device <code>AVSpeechSynthesizer</code> (the system text-to-speech engine already built into iOS), with the best voice installed on your device. Narration happens entirely on your device — no story text is sent anywhere to produce it, and there is no cloud text-to-speech vendor involved. While it plays, the story's title, chapter, and cover appear in iOS's <strong>Now Playing</strong> controls on your lock screen, which iOS keeps on your device.</p>
+
+<h3>Reminders</h3>
+
+<p>If you turn them on, Novelist schedules <strong>local notifications</strong> on your device: a nudge when a story's next chapter is waiting, and a nightly reminder for a bedtime series at the time you choose. They are created by the app on your device; nothing is sent to us to deliver them.</p>
 
 <hr>
 
 <h2>3. Permissions the app asks for</h2>
-<p>Novelist asks for three optional permissions, each only at the moment you first use the feature that needs it. Decline any of them and the rest of the app keeps working normally.</p>
+
+<p>Novelist asks for four optional permissions, each only at the moment you first use the feature that needs it. Decline any of them and the rest of the app keeps working normally.</p>
+
 <ul>
   <li><strong>Microphone</strong> — to capture audio while you dictate a story idea or a steering instruction, and only while dictation is active.</li>
   <li><strong>Speech Recognition</strong> — to turn that audio into text (see "Dictation" in Section 2).</li>
   <li><strong>Photo library (add only)</strong> — so iOS can save an exported story-card image if you choose "Save Image" from the share sheet. Novelist cannot read, browse, or list your photos.</li>
+  <li><strong>Notifications</strong> — for the optional next-chapter and bedtime-series reminders (see "Reminders" in Section 2).</li>
 </ul>
-<p>Novelist does <strong>not</strong> request access to the camera, contacts, location, motion data, notifications, calendars, or health data.</p>
+
+<p>To use your own photo as a cover, Novelist uses iOS's <strong>photo picker</strong>, which needs no permission: the app receives only the one photo you pick and cannot see the rest of your library.</p>
+
+<p>Novelist does <strong>not</strong> request access to the camera, contacts, location, motion data, calendars, or health data.</p>
 
 <hr>
 
 <h2>4. How we use this data</h2>
+
 <ul>
   <li><strong>On-device data</strong> gives you fast, offline-friendly access to your library and settings.</li>
   <li><strong>Your anonymous account and server-side story data</strong> let our backend generate chapters, continue your story across sessions with consistency, apply free-tier and fair-use limits, keep your Pro entitlement in sync, prevent abuse, and monitor operating cost.</li>
-  <li><strong>Content sent to Anthropic</strong> exists solely to generate the chapter, plot redirection, edit, or continuation you asked for, and to screen it for safety.</li>
+  <li><strong>Content sent to Anthropic</strong> exists solely to generate the chapter, plot redirection, edit, or continuation you asked for, the chapter extras, a novel's plan, and a cover description, and to screen it for safety.</li>
+  <li><strong>The cover description sent to fal.ai</strong> exists solely to generate your story's cover.</li>
+  <li><strong>A shared chapter page</strong> exists only because you chose to share it, and only for as long as you keep sharing it.</li>
   <li><strong>Dictated audio</strong> is used only to produce the text that appears in the box you are typing into. We never receive or store it.</li>
   <li><strong>Firebase Analytics</strong> tells us, in aggregate, which features are used and where people get stuck (e.g., at the paywall) so we can decide what to fix or improve. We look at counts, not individuals.</li>
 </ul>
+
 <p>We do <strong>not</strong> sell your personal information, and we do not share it for cross-context behavioural advertising (as those terms are defined under the CCPA/CPRA). We do not build advertising profiles or share data with data brokers.</p>
 
 <hr>
 
 <h2>5. Who we share data with</h2>
+
 <ul>
   <li><strong>Google LLC</strong> (and, for EEA/UK/Swiss users, Google Ireland Limited) operates <strong>Firebase</strong> — Authentication, Cloud Functions, <strong>Cloud Firestore</strong> (which stores your story content), App Check, and Analytics — as our service provider, under the <a href="https://firebase.google.com/terms/data-processing-terms">Firebase Data Processing Terms</a> and <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</li>
   <li><strong>Anthropic, PBC</strong> processes the story/character content described in Section 2 through its Claude API to generate and safety-check text, under <a href="https://www.anthropic.com/legal/privacy">Anthropic's Privacy Policy</a> and <a href="https://www.anthropic.com/legal/commercial-terms">Commercial Terms of Service</a>.</li>
+  <li><strong>Features and Labels, Inc. (fal.ai)</strong> generates cover images from a short scene description (see "Cover images" in Section 2), under <a href="https://fal.ai/privacy">fal.ai's Privacy Policy</a>.</li>
   <li><strong>Apple Inc.</strong> processes your in-app purchases and, where on-device speech recognition is unavailable for your language, transcribes dictated audio, under the <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a>.</li>
   <li>We may also disclose information where required by valid legal process.</li>
 </ul>
+
 <p>No other third-party analytics, advertising, or tracking SDK is bundled in the app. These providers primarily process data on servers in the <strong>United States</strong>; for EEA/UK/Swiss users, international transfers rely on Standard Contractual Clauses incorporated into each provider's terms.</p>
 
 <hr>
 
 <h2>6. How long we keep it</h2>
+
 <ul>
   <li><strong>On-device data</strong> — kept on your device until you delete it in the app or uninstall the app.</li>
   <li><strong>Server-side story content</strong> (setup, premise, characters, outline, chapter text, and story memory in Firestore) — retained on our backend until it is deleted on request. <strong>Important:</strong> deleting a story inside the app removes the copy on your device, but does <strong>not</strong> automatically delete the copy on our backend, and neither does uninstalling the app. There is no automatic expiry. To have your server-side content erased, email us (see Section 7).</li>
+  <li><strong>Cover images</strong> — kept with the story they belong to and erased with it on request.</li>
+  <li><strong>Shared chapter pages</strong> — kept until you stop sharing or delete the story in the app (the page is then switched off) or we remove them; erased on request as above. Report records are kept while the page exists.</li>
   <li><strong>Anonymous account, usage counters, spend totals, and entitlement</strong> — retained on our backend so limits and access keep working; erased on request as above.</li>
   <li><strong>Firebase Analytics</strong> — retained by Google per Firebase's default event retention (up to 14 months).</li>
 </ul>
@@ -172,6 +229,7 @@
 <hr>
 
 <h2>7. Your rights and choices</h2>
+
 <ul>
   <li><strong>Edit or delete on your device</strong> — change or delete any story, character, or setting directly in the app; uninstalling removes all on-device data.</li>
   <li><strong>Erase your server-side content</strong> — because we don't collect a name or email, we can't look you up automatically. Email <strong>mukashi.dev@gmail.com</strong> to request deletion of the story content and account data stored on our backend, and we will locate and erase it. (If you still have the app installed, mention that so we can help identify your account ID.)</li>
@@ -183,11 +241,13 @@
 <hr>
 
 <h2>8. Children's privacy</h2>
+
 <p>Novelist is a general-audience creative-writing app and is <strong>not directed to children under 13</strong> (or the minimum age in your country). It includes an optional content-tone setting that lets you steer generated stories toward more age-appropriate themes, but this is a creative preference, not a child-directed mode — the app can also generate mature themes (e.g., horror, dark/gritty tone, romance) at your request. We do not knowingly collect personal information from children. If you believe a child has used the app and provided us information, email <strong>mukashi.dev@gmail.com</strong> and we will address it.</p>
 
 <hr>
 
 <h2>9. Security</h2>
+
 <ul>
   <li>On-device data is stored in iOS's app sandbox.</li>
   <li>Server-side story content is stored in Firebase Cloud Firestore, protected by owner-scoped security rules so one anonymous account cannot read another's stories. Administrative access is limited to us as the operator, for running and supporting the service.</li>
@@ -198,11 +258,15 @@
 <hr>
 
 <h2>10. Changes &amp; contact</h2>
+
 <p>If we change this policy, the new version replaces this page and the "Effective date" above is updated; material changes (e.g., a new third-party service, a new category of data) are noted in the app's release notes. This policy applies alongside our <a href="terms.html">Terms of Use</a>.</p>
+
 <p>Questions, requests, or complaints: <strong>mukashi.dev@gmail.com</strong>.</p>
 
+<hr>
+
 <footer>
-  © 2026 Abdullah Al Hadi (Mukashi). Novelist. Last updated July 25, 2026.
+  © 2026 Abdullah Al Hadi (Mukashi). Novelist. Last updated October 22, 2026.
 </footer>
 
 </main>
