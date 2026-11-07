@@ -1,6 +1,6 @@
 # Novelist — Terms of Use
 
-**Effective date:** October 22, 2026
+**Effective date:** November 7, 2026
 
 These terms govern your use of the Novelist iOS app. In short: Novelist helps you write stories with AI assistance and gives you a library of ready-to-read stories. The stories you create are yours; the words an AI model writes for you are, like any AI output, not guaranteed to be accurate, original, or suitable for every purpose.
 
@@ -20,21 +20,23 @@ You must be at least 13 (or the minimum age of digital consent where you live) a
 
 ## 4. Subscriptions & payments
 
-Novelist is free to download. Starting a story and generating a limited number of chapters and regenerations is free; beyond that free limit, continuing requires **Novelist Pro**, an auto-renewing subscription offered in **weekly, monthly, and yearly** terms. For each option, the length and current price are shown in the app before you buy, and payment is charged to your Apple Account at confirmation of purchase.
+Novelist is free to download. A limited number of AI generations (such as new chapters and rewrites) and part of the Discover library are free; beyond that, and for features such as the longest chapters, you need **Novelist Pro**, an auto-renewing subscription offered in **weekly, monthly, and yearly** terms. For each option, the length and current price are shown in the app before you buy, and payment is charged to your Apple Account at confirmation of purchase.
 
 - **Auto-renewal.** Your subscription automatically renews for the same term unless you cancel at least 24 hours before the current period ends. Your account is charged for renewal within 24 hours before the end of the current period, at the then-current price.
-- **Managing or cancelling.** Manage or cancel any time in **Settings → [your name] → Subscriptions** on your Apple device. Cancelling stops future renewals but does not refund the current period.
+- **Free trials.** If a plan offers a free trial, the app shows its length and the price that follows before you start. Unless you cancel at least 24 hours before the trial ends, it becomes a paid subscription and your Apple Account is charged. Any unused part of a trial ends when you buy a subscription.
+- **Managing or cancelling.** Manage or cancel any time in **Settings → [your name] → Subscriptions** on your Apple device. Cancelling stops future renewals but does not refund the current period. Deleting the app does not cancel your subscription.
 - **Restoring.** Use **Restore Purchases** in the app to re-apply an active subscription on a new device or after reinstalling.
 - **Refunds.** Handled entirely by **Apple**, not us — request one at [reportaproblem.apple.com](https://reportaproblem.apple.com).
 - Purchases are processed by Apple through the App Store under the [Apple Media Services Terms](https://www.apple.com/legal/internet-services/itunes/).
+- **Fair use.** Novelist Pro has no fixed total of stories or chapters, but hourly and daily limits apply, to keep the service running and stop automated abuse. After heavy use, chapters may be written by a faster AI model, and writing may pause until the limit resets.
 
 ## 5. Your content
 
-The stories, characters, and other input you create in Novelist — and the chapters generated for you — are **your content**. Where AI-generated text is not eligible for copyright protection under applicable law, we make no claim to it and you're free to use it as you wish. To run the service, you grant us the limited right to transmit the story/character details and instructions you provide to Anthropic's API to generate the output you requested, and to **store your story content on our backend** so it can be generated, continued across sessions, and returned to you, as described in the [Privacy Policy](index.html). You are responsible for the prompts (genre choices, character details, Fine-Tune/Redirect Plot text) you provide and for reviewing generated output before publishing, sharing, or relying on it — including checking it doesn't infringe someone else's rights or make false factual claims.
+The stories, characters, and other input you create in Novelist — and the chapters generated for you — are **your content**. Where AI-generated text is not eligible for copyright protection under applicable law, we make no claim to it and you're free to use it as you wish. To run the service, you grant us the limited right to transmit the story/character details and instructions you provide to Anthropic's API to generate the output you requested, to send a scene description drawn from them to fal.ai to create your cover, to publish the copy you choose to share (see Section 6), and to **store your story content on our backend** so it can be generated, continued across sessions, and returned to you, as described in the [Privacy Policy](index.html). You are responsible for the prompts (genre choices, character details, Fine-Tune/Redirect Plot text) you provide and for reviewing generated output before publishing, sharing, or relying on it — including checking it doesn't infringe someone else's rights or make false factual claims.
 
 ## 6. Sharing
 
-When you share a story's first chapter as a link or send it as a gift, you choose to make that chapter, its title, its cover, and the pen name you entered readable by anyone who has the link. Share only what you have the right to share, and nothing that breaks the rules in Section 7. You can stop sharing at any time in the app. We may hide or remove any shared page — for example after reports from readers — and may limit sharing for accounts that misuse it.
+When you share a story's first chapter as a link or send it as a gift, you choose to make that chapter, its title, its cover, the pen name you entered, and, for a gift, the recipient's name and your note readable by anyone who has the link. Share only what you have the right to share, and nothing that breaks the rules in Section 7. You can stop sharing at any time in the app. We may hide or remove any shared page — for example after reports from readers — and may limit sharing for accounts that misuse it.
 
 ## 7. Acceptable use
 
